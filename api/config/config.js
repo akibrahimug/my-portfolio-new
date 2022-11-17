@@ -4,7 +4,7 @@ require("dotenv").config();
 module.exports = {
   development: {
     username: "ak",
-    password: "Ezra2021",
+    password: process.env.LOCAL_PASSWORD,
     database: "myrestapi",
     host: "127.0.0.1",
     port: 5432,
