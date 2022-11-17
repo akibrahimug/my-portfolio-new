@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Project title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "projectTitle"',
+            msg: 'Please provide a Project title"',
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: 'Please provide a Picture URL"',
           },
         },
       },
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             msg: "Project description is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "projectDescription"',
+            msg: 'Please provide a Project description"',
           },
         },
       },
@@ -53,7 +53,7 @@ module.exports = (sequelize) => {
             msg: "Live site URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "liveSiteUrl"',
+            msg: 'Please provide a Live site URL"',
           },
         },
       },
@@ -65,7 +65,7 @@ module.exports = (sequelize) => {
             msg: "Github URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "githubUrl"',
+            msg: 'Please provide a Github URL"',
           },
         },
       },

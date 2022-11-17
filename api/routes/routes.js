@@ -59,7 +59,7 @@ router.get(
 
 // Create a new tech stack
 router.post(
-  "/techstacks",
+  "/technologies",
   userAuth,
   asyncHandler(async (req, res) => {
     try {
@@ -83,7 +83,7 @@ router.post(
 
 // Get all tech stacks
 router.get(
-  "/techstacks",
+  "/technologies",
   asyncHandler(async (req, res) => {
     try {
       const techStacks = await TechStack.findAll({
@@ -362,12 +362,12 @@ router.get(
 
 // Create a Resume
 router.post(
-  "/resume",
+  "/resumes",
   userAuth,
   asyncHandler(async (req, res) => {
     try {
       const user = req.currentUser;
-      const Resume = await Resume.create(req.body);
+      const resume = await Resume.create(req.body);
       res.status(201).location("/resume").end();
     } catch (error) {
       if (
@@ -385,7 +385,7 @@ router.post(
 
 // Get the all resume
 router.get(
-  "/resume",
+  "/resumes",
   asyncHandler(async (req, res) => {
     try {
       const resume = await Resume.findAll({
@@ -499,7 +499,7 @@ router.delete(
 );
 
 // create   Methodology
-router.get(
+router.post(
   "/methodology",
   asyncHandler(async (req, res) => {
     try {

@@ -25,6 +25,12 @@ function MyRestAPI() {
           >
             Personal Statments
           </button>
+          <button
+            onClick={() => router.push("/newmethodologies")}
+            className="text-2xl font-bold mb-4 border p-10 text-center rounded-md bg-gray-200 "
+          >
+            Methodologies
+          </button>
         </div>
       </main>
     </>

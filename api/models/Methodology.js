@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             msg: "Methodology title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "methodologyTitle"',
+            msg: "Please provide a methodology title",
           },
         },
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             msg: "Description is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "description"',
+            msg: "Please provide a description",
           },
         },
       },

@@ -1,20 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import RestHead from "../components/RestHead";
 import { useRouter } from "next/router";
-import Popover from "@mui/material/Popover";
 import { Context } from "./Context";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 
-function newresume() {
-  const { backend, authenticatedUser } = useContext(Context);
+function newmethodology() {
+  const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
 
   // get the data from the form
   const [data, setData] = useState({
-    resumeTitle: "",
-    resumeUrl: "",
-    date: "",
+    methodologyTitle: "",
+    description: "",
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
 
@@ -30,14 +26,14 @@ function newresume() {
   const submit = (e) => {
     e.preventDefault();
     backend
-      .createResume(data)
+      .createMethodology(data)
       .then((errors) => {
         if (errors.length) {
           // set the errors array to display them
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/resume");
+          router.push("/profiles");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -45,7 +41,7 @@ function newresume() {
         console.log(err);
       });
   };
-  console.log(data);
+
   return (
     <div>
       <RestHead />
@@ -54,7 +50,7 @@ function newresume() {
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
-                New Resume
+                New Methodology
               </h3>
               <p className="mt-1 text-sm text-gray-600">
                 This information will be saved in a postgresql database. You can
@@ -69,56 +65,46 @@ function newresume() {
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3 sm:col-span-2">
                       <label
-                        htmlFor="resumeTitle"
+                        htmlFor="methodologyTitle"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Resume Title
+                        Methodology Title
                       </label>
                       <div className="my-2 flex rounded-md shadow-sm">
                         <input
                           type="text"
-                          name="resumeTitle"
-                          id="resumeTitle"
+                          name="methodologyTitle"
+                          id="methodologyTitle"
                           className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="Facebook"
-                          onChange={change}
-                        />
-                      </div>
-                      <label
-                        htmlFor="resumeUrl"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Resume URL
-                      </label>
-                      <div className="mt-1 flex rounded-md shadow-sm">
-                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                          Paste URL here
-                        </span>
-                        <input
-                          type="text"
-                          name="resumeUrl"
-                          id="resumeUrl"
-                          className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="https://www.example.com"
-                          onChange={change}
-                        />
-                      </div>
-                      <label
-                        htmlFor="date"
-                        className="block text-sm mt-2 font-medium text-gray-700"
-                      >
-                        Created on Date
-                      </label>
-                      <div className="my-2 flex rounded-md shadow-sm">
-                        <input
-                          type="date"
-                          name="date"
-                          id="date"
-                          className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="KISS"
                           onChange={change}
                         />
                       </div>
                     </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Description
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="description"
+                        name="description"
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="This is a project that does...."
+                        defaultValue={""}
+                        onChange={change}
+                      />
+                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Brief description for the method. Tech used, Methodology,
+                      etc...
+                    </p>
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-4 justify-end">
@@ -129,7 +115,7 @@ function newresume() {
                     Save
                   </button>
                   <button
-                    onClick={() => router.push("/resume")}
+                    onClick={() => router.push("/newprofile")}
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none max-h-10"
                   >
                     Back
@@ -161,4 +147,4 @@ function newresume() {
   );
 }
 
-export default newresume;
+export default newmethodology;

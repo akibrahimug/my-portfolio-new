@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             msg: "Company is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "company"',
+            msg: "Please provide a company",
           },
         },
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             msg: "Position is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "position"',
+            msg: "Please provide a position",
           },
         },
       },
@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
             msg: "Start date is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "startDate"',
+            msg: "Please provide a start date",
           },
         },
       },
@@ -52,7 +52,7 @@ module.exports = (sequelize) => {
             msg: "End date is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "endDate"',
+            msg: "Please provide a end date",
           },
         },
       },
@@ -64,7 +64,7 @@ module.exports = (sequelize) => {
             msg: "Description is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "description"',
+            msg: "Please provide a description",
           },
         },
       },

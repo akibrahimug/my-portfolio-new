@@ -56,30 +56,6 @@ function projects() {
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
-              <div className="mx-4">
-                Description:
-                <p className="font-bold my-2 mx-1 inline">
-                  {project.projectDescription}
-                </p>
-              </div>
-              <div className="mx-4">
-                GitHub:
-                <a
-                  href={project.githubUrl}
-                  className="font-bold my-2 mx-1 inline"
-                >
-                  {project.githubUrl}
-                </a>
-              </div>
-              <div className="mx-4">
-                LiveSite:
-                <a
-                  href={project.liveSiteUrl}
-                  className="font-bold my-2 mx-1 inline"
-                >
-                  {project.liveSiteUrl}
-                </a>
-              </div>
             </div>
           ))
         ) : (

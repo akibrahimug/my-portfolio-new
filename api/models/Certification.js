@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Certification title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "certificationTitle"',
+            msg: "Please provide a certification title",
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "School is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "school"',
+            msg: "Please provide a school",
           },
         },
       },
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             msg: "Start date is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "startDate"',
+            msg: "Please provide a start date",
           },
         },
       },
@@ -53,7 +53,7 @@ module.exports = (sequelize) => {
             msg: "End date is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "endDate"',
+            msg: "Please provide a end date",
           },
         },
       },
@@ -65,7 +65,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: "Please provide a picture URL",
           },
         },
       },

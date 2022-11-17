@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             msg: "Resume title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "resumeTitle"',
+            msg: "Please provide a Resume title",
           },
         },
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
             msg: "Resume URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "resumeUrl"',
+            msg: "Please provide a Resume URL",
           },
         },
       },
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             msg: "Date is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "date"',
+            msg: "Please provide a date",
           },
         },
       },

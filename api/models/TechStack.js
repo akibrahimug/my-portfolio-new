@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Tech title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "techTitle"',
+            msg: "Please provide a Technology title",
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: "Please provide a Picture URL",
           },
         },
       },

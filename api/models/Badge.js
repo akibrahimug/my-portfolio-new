@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Badge title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "badgeTitle"',
+            msg: "Please provide a badge title",
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: "Please provide a picture URL",
           },
         },
       },

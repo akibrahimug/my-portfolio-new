@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: 'Please provide a picture URL"',
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "From date is required (A date when you first used this avarta)",
           },
           notEmpty: {
-            msg: 'Please provide a value for "from date"',
+            msg: 'Please provide a date for "from"',
           },
         },
       },
@@ -38,10 +38,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "End date is required (A date when you may want to update your avarta)",
+            msg: "End date is required (A date when you may want to update your avatar)",
           },
           notEmpty: {
-            msg: 'Please provide a value for "to date"',
+            msg: 'Please provide a date for "to"',
           },
         },
       },

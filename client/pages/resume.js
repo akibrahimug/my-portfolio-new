@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Context } from "./Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function projects() {
+function resumes() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
@@ -21,14 +21,14 @@ function projects() {
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
         <div className="flex justify-around">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            My Projects
+            My Resumes
           </h2>
           <div className="flex gap-5">
             <button
               className="p-3 bg-gray-500 rounded-lg shadow-lg text-white font-bold"
-              onClick={() => router.push("/newproject")}
+              onClick={() => router.push("/newresume")}
             >
-              Create New Project
+              Create New Resume
             </button>
             <button
               className="p-3 bg-gray-400 rounded-lg hover:bg-gray-500 shadow-lg text-white font-bold"
@@ -56,30 +56,6 @@ function projects() {
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
-              <div className="mx-4">
-                Description:
-                <p className="font-bold my-2 mx-1 inline">
-                  {project.projectDescription}
-                </p>
-              </div>
-              <div className="mx-4">
-                GitHub:
-                <a
-                  href={project.githubUrl}
-                  className="font-bold my-2 mx-1 inline"
-                >
-                  {project.githubUrl}
-                </a>
-              </div>
-              <div className="mx-4">
-                LiveSite:
-                <a
-                  href={project.liveSiteUrl}
-                  className="font-bold my-2 mx-1 inline"
-                >
-                  {project.liveSiteUrl}
-                </a>
-              </div>
             </div>
           ))
         ) : (
@@ -98,4 +74,4 @@ function projects() {
   );
 }
 
-export default projects;
+export default resumes;

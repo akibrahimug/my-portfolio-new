@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Personal statement is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "statement"',
+            msg: 'Please provide a personal statement"',
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "From date is required (A date when you made the statement)",
           },
           notEmpty: {
-            msg: 'Please provide a value for "from date"',
+            msg: 'Please provide a date for "from"',
           },
         },
       },
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             msg: "End date is required (A date when you may want to update your personal statement)",
           },
           notEmpty: {
-            msg: 'Please provide a value for "to date"',
+            msg: 'Please provide a date for "to"',
           },
         },
       },
