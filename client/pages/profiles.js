@@ -62,7 +62,7 @@ function profiles() {
       >
         {personalStatement && avartas ? (
           avartas.map((avarta, i) => (
-            <div key={i} className="group relative border">
+            <div key={i} className="group relative border mx-4">
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 ">
                 <img
                   src={avarta.pictureUrl}
@@ -70,17 +70,15 @@ function profiles() {
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
-              <div className="mx-4">
-                Personal Statement:
-                <p className="font-bold my-2 mx-1 inline">{avarta.statement}</p>
-              </div>
-              <div className="mx-4">
-                From:
-                <p className="font-bold my-2 mx-1 inline">{avarta.from}</p>
-              </div>
-              <div className="mx-4">
-                To:
-                <p className="font-bold my-2 mx-1 inline">{avarta.to}</p>
+              <div className="text-center text-gray-500 my-4">
+                <div className="mx-4 ">
+                  From:
+                  <p className="font-bold my-2 mx-1 inline">{avarta.from}</p>
+                </div>
+                <div className="mx-4">
+                  To:
+                  <p className="font-bold my-2 mx-1 inline">{avarta.to}</p>
+                </div>
               </div>
             </div>
           ))

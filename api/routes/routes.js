@@ -182,7 +182,6 @@ router.post(
     try {
       const user = req.currentUser;
       const badge = await Badge.create(req.body);
-      // await badge.setUser(user);
       res.status(201).location("/badges").end();
     } catch (error) {
       if (
@@ -429,7 +428,7 @@ router.put(
 
 // create Message
 router.post(
-  "/message",
+  "/messages",
   asyncHandler(async (req, res) => {
     try {
       const message = await Message.create(req.body);
@@ -448,7 +447,7 @@ router.post(
 
 // get all messages
 router.get(
-  "/message",
+  "/messages",
   asyncHandler(async (req, res) => {
     try {
       const messages = await Message.findAll({
@@ -478,22 +477,16 @@ router.get(
   })
 );
 
-// Delete single message
+// delete message
 router.delete(
-  "/message/:id",
+  "/messages/:id",
   userAuth,
   asyncHandler(async (req, res) => {
-    try {
-      const user = req.currentUser;
-      const message = Message.findOne({
-        where: { messageID: req.params.id },
-      });
-      if (message) {
-        const deleteMessage = await Message.destroy(message);
-        res.status(204).location("/").end;
-      }
-    } catch (error) {
-      throw error;
+    const user = req.currentUser;
+    const message = await Message.findByPk(req.params.id);
+    if (message) {
+      await message.destroy();
+      res.status(204).location("/").end;
     }
   })
 );

@@ -4,14 +4,13 @@ import { useRouter } from "next/router";
 import { Context } from "./Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function projects() {
+function message() {
   const router = useRouter();
   const { backend } = useContext(Context);
-
-  const [projects, setProjects] = useState([]);
+  const [messages, setMessages] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
-      setProjects(res);
+    backend.getMessage().then((res) => {
+      setMessages(res);
     });
   }, []);
 
@@ -21,14 +20,15 @@ function projects() {
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
         <div className="flex justify-around">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            My Projects
+            My Messages
           </h2>
           <div className="flex gap-5">
             <button
+              disabled
               className="p-3 bg-gray-500 rounded-lg shadow-lg text-white font-bold"
-              onClick={() => router.push("/newproject")}
+              onClick={() => router.push("/newmessage")}
             >
-              Create New Project
+              Create New Message
             </button>
             <button
               className="p-3 bg-gray-400 rounded-lg hover:bg-gray-500 shadow-lg text-white font-bold"
@@ -39,63 +39,50 @@ function projects() {
           </div>
         </div>
       </div>
-      <div
-        className={`${
-          projects
-            ? "grid mt-6 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 max-w-7xl mx-auto "
-            : ""
-        }`}
-      >
-        {projects ? (
-          projects.map((project, i) => (
-            <div key={i} className="group relative border">
-              <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 ">
-                <img
-                  src={project.pictureUrl}
-                  alt=""
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                />
-              </div>
-              <div className="mx-4">
-                Description:
-                <p className="font-bold my-2 mx-1 inline">
-                  {project.projectDescription}
+      <main className="max-w-[1250px] m-auto p-[1rem]">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {messages.length ? (
+            messages.map((message, i) => (
+              <div
+                key={i}
+                className="  mb-4 relative border py-8 px-3 rounded-md bg-gray-200 text-black"
+              >
+                <span className="text-[13px] mb-2">Email: {message.email}</span>
+                <p className="text-[14px] bg-white p-4 rounded-md">
+                  {message.message}
                 </p>
-              </div>
-              <div className="mx-4">
-                GitHub:
-                <a
-                  href={project.githubUrl}
-                  className="font-bold my-2 mx-1 inline"
+                <span className="text-[12px] absolute bottom-2 right-2">
+                  {new Date(message.createdAt).toLocaleString().split(",")[0]}
+                </span>
+                <span className="absolute text-[14px] top-[-10px] left-[-10px] text-sm text-white rounded-md p-1 bg-gray-700">
+                  {message.name}
+                </span>
+                <button
+                  className="p-2 bg-gray-400 rounded-md absolute text-[14px] top-2 right-2 text-sm hover:bg-gray-500 shadow-lg text-white font-bold"
+                  onClick={() => {
+                    backend.deleteMessage(message.messageID);
+                    setMessages(messages.filter((m) => m !== message));
+                  }}
                 >
-                  {project.githubUrl}
-                </a>
+                  Delete
+                </button>
               </div>
-              <div className="mx-4">
-                LiveSite:
-                <a
-                  href={project.liveSiteUrl}
-                  className="font-bold my-2 mx-1 inline"
-                >
-                  {project.liveSiteUrl}
-                </a>
-              </div>
-            </div>
-          ))
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "30px",
-            }}
-          >
-            <CircularProgress className="text-gray-500 " />
-          </Box>
-        )}
-      </div>
+            ))
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
+              <CircularProgress className="text-gray-500 " />
+            </Box>
+          )}
+        </div>
+      </main>
     </div>
   );
 }
 
-export default projects;
+export default message;

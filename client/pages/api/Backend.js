@@ -479,4 +479,111 @@ export default class Backend {
       throw new Error("Something went wrong");
     }
   }
+
+  // create socialMedia
+  async createSocialMedia(socialMedia) {
+    // create a response constant to save the data that POST to the api
+    const response = await this.api("/socials", "POST", socialMedia);
+    // if the post was successful
+    if (response.status === 201) {
+      // return nothing
+      return [];
+      // else if the post had a problem
+    } else if (response.status === 400) {
+      // return a response as JSOn then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors;
+      });
+      // else throw any other errors from the api
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  // get socialMedia
+  async getSocialMedia() {
+    // create a response constant to save the data that GET from the api
+    const response = await this.api("/socials");
+    // if the get was successful
+    if (response.status === 200) {
+      // return the json data and then save it as data
+      return response.json().then((data) => data);
+      // else id the response has any problem
+    } else if (
+      response.status === 401 ||
+      response.status === 400 ||
+      response.status === 500
+      // return null
+    ) {
+      return null;
+      // else throw an error from the api response
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  // create message
+  async createMessage(message) {
+    // create a response constant to save the data that POST to the api
+    const response = await this.api("/messages", "POST", message);
+    // if the post was successful
+    if (response.status === 201) {
+      // return nothing
+      return [];
+      // else if the post had a problem
+    } else if (response.status === 400) {
+      // return a response as JSOn then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors;
+      });
+      // else throw any other errors from the api
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  // get message
+  async getMessage() {
+    // create a response constant to save the data that GET from the api
+    const response = await this.api("/messages");
+    // if the get was successful
+    if (response.status === 200) {
+      // return the json data and then save it as data
+      return response.json().then((data) => data);
+      // else id the response has any problem
+    } else if (
+      response.status === 401 ||
+      response.status === 400 ||
+      response.status === 500
+      // return null
+    ) {
+      return null;
+      // else throw an error from the api response
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  // delete message
+  async deleteMessage(id) {
+    // create a response constant to save the data that DELETE from the api
+    const response = await this.api(`/messages/${id}`, "DELETE");
+    // if the delete was successful
+    if (response.status === 204) {
+      // return nothing
+      return [];
+      // else if the delete had a problem
+    } else if (response.status === 400) {
+      // return a response as JSOn then
+      return response.json().then((data) => {
+        // return the errors
+        return data.errors;
+      });
+      // else throw any other errors from the api
+    } else {
+      throw new Error("Something went wrong");
+    }
+  }
 }

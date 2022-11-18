@@ -42,7 +42,7 @@ function newexperience() {
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/projects");
+          router.push("/experiences");
         }
       })
       // catch any errors thrown by the api and log them to the console

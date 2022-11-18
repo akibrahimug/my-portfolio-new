@@ -1,16 +1,34 @@
-import React from "react";
-import Image from "next/image";
-import Profile from "./svg/avarta.png";
+import React, { useContext, useEffect, useState } from "react";
 import Line from "./svg/line.svg";
 import Bio from "./Bio";
+import { Context } from "../pages/Context";
 
 function Avarta() {
+  const { backend } = useContext(Context);
+
+  // get profile
+  const [profile, setProfile] = useState();
+  useEffect(() => {
+    backend.getAvartas().then((profile) => {
+      setProfile(profile);
+    });
+  }, []);
+
   return (
     <div>
       <div className="flex justify-center lg:justify-end">
-        <div className="relative h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10">
-          <Image src={Profile} alt="" layout="fill" />
-        </div>
+        {profile ? (
+          profile.map((p, i) => (
+            <div
+              key={i}
+              className="relative h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
+            >
+              <img src={p.pictureUrl} alt="" layout="fill" />
+            </div>
+          ))
+        ) : (
+          <></>
+        )}
         <span className="font-semibold absolute w-[219px] right-10 top-[90px] text-lg hidden xl:block text-gray-600">
           {`"Let's create an amazing web experince together."`}
         </span>

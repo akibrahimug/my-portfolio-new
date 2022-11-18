@@ -21,14 +21,14 @@ function projects() {
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
         <div className="flex justify-around">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            My Certifications
+            My Experiences
           </h2>
           <div className="flex gap-5">
             <button
               className="p-3 bg-gray-500 rounded-lg shadow-lg text-white font-bold"
               onClick={() => router.push("/newexperience")}
             >
-              Add New Certificate
+              Add New Experience
             </button>
             <button
               className="p-3 bg-gray-400 rounded-lg hover:bg-gray-500 shadow-lg text-white font-bold"

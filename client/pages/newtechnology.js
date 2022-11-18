@@ -6,7 +6,7 @@ import { Context } from "./Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function newproject() {
+function newtechonlogy() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,13 +52,17 @@ function newproject() {
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
   data.pictureUrl = currentImage ? currentImage : "";
+
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
     const { name, value } = e.target;
-    // set the course an object with the current courses spread, and name and value stored
-    // as key value pairs
-    setData((project) => ({ ...project, [name]: value }));
+    // if the event target id is certificationID or experienceID, then convert the value to a number
+    if (name === "certificationID" || name === "experienceID") {
+      setData((project) => ({ ...project, [name]: parseInt(value) }));
+    } else {
+      setData((project) => ({ ...project, [name]: value }));
+    }
   };
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
@@ -71,7 +75,7 @@ function newproject() {
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/projects");
+          router.push("/technologies");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -79,6 +83,24 @@ function newproject() {
         console.log(err);
       });
   };
+
+  // get the certificates
+  const [certificates, setCertificates] = useState([]);
+  useEffect(() => {
+    backend.getCertifications().then((res) => {
+      setCertificates(res);
+    });
+  }, []);
+
+  // get the experiences
+  const [experiences, setExperiences] = useState([]);
+  useEffect(() => {
+    backend.getExperience().then((res) => {
+      setExperiences(res);
+    });
+  }, []);
+
+  console.log(data);
 
   return (
     <div>
@@ -88,7 +110,7 @@ function newproject() {
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
-                New Project
+                New Technology
               </h3>
               <p className="mt-1 text-sm text-gray-600">
                 This information will be saved in a postgresql database. You can
@@ -198,7 +220,16 @@ function newproject() {
                         className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         onChange={change}
                       >
-                        <option value="none">None</option>
+                        <option value="">Choose</option>
+                        {certificates ? (
+                          certificates.map((cert, i) => (
+                            <option key={i} value={cert.certificationID}>
+                              {cert.certificationTitle}
+                            </option>
+                          ))
+                        ) : (
+                          <></>
+                        )}
                       </select>
                     </div>
                     <div className="mt-1 flex rounded-md shadow-sm">
@@ -211,7 +242,17 @@ function newproject() {
                         className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         onChange={change}
                       >
-                        <option value="none">None</option>
+                        <option value="">Choose</option>
+                        {experiences ? (
+                          experiences.map((exp, i) => (
+                            <option key={i} value={exp.experienceID}>
+                              {exp.position} at
+                              {exp.company}
+                            </option>
+                          ))
+                        ) : (
+                          <option></option>
+                        )}
                       </select>
                     </div>
                   </div>
@@ -256,4 +297,4 @@ function newproject() {
   );
 }
 
-export default newproject;
+export default newtechonlogy;

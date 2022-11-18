@@ -55,9 +55,16 @@ function newproject() {
   const change = (e) => {
     // create name and value to store the event targets
     const { name, value } = e.target;
+
+    // if the event target id is techStackID, then set the value to a number
+    if (name === "techStackID") {
+      setData((project) => ({ ...project, [name]: parseInt(value) }));
+    } else {
+      setData((project) => ({ ...project, [name]: value }));
+    }
+
     // set the course an object with the current courses spread, and name and value stored
     // as key value pairs
-    setData((project) => ({ ...project, [name]: value }));
   };
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
@@ -70,7 +77,7 @@ function newproject() {
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/projects");
+          router.push("/badges");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -78,6 +85,16 @@ function newproject() {
         console.log(err);
       });
   };
+
+  // get the technologies
+  const [technologies, setTechnologies] = useState([]);
+  useEffect(() => {
+    backend.getTechnologies().then((technologies) => {
+      setTechnologies(technologies);
+    });
+  }, []);
+
+  console.log(data);
 
   return (
     <div>
@@ -189,7 +206,7 @@ function newproject() {
 
                   <div>
                     <label
-                      htmlFor="teckStackID"
+                      htmlFor="techStackID"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Teck Stack
@@ -200,13 +217,22 @@ function newproject() {
                       </span>
                       <select
                         type="text"
-                        name="teckStackID"
-                        id="teckStackID"
+                        name="techStackID"
+                        id="techStackID"
                         className="flex text-gray-500 w-[315px] sm:w-[257px] lg:w-[385px] rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Full Stack Web Development"
                         onChange={change}
                       >
-                        <option value="React">React</option>
+                        <option value="">Choose</option>
+                        {technologies ? (
+                          technologies.map((tech, i) => (
+                            <option key={i} value={tech.techStackID}>
+                              {tech.techTitle}
+                            </option>
+                          ))
+                        ) : (
+                          <></>
+                        )}
                       </select>
                     </div>
                   </div>

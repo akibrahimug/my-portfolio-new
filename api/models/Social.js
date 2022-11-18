@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             msg: "Social title is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "socialTitle"',
+            msg: "Please provide a Social Media title",
           },
         },
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             msg: "Picture URL is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "pictureUrl"',
+            msg: "Please provide a Picture URL",
           },
         },
       },
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             msg: "Link is required",
           },
           notEmpty: {
-            msg: 'Please provide a value for "Link"',
+            msg: "Please provide a Social Media Link",
           },
         },
       },
