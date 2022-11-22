@@ -5,7 +5,20 @@ import Line from "./svg/line.svg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { LinkedIn, Twitter } from "@mui/icons-material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Contact from "./Contact";
+
 function ProfileDesc({ cetified }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div>
       <div className="md:w-[75%] flex flex-col m-auto  xl:ml-10  2xl:ml-20 md:pt-20 ">
@@ -18,11 +31,36 @@ function ProfileDesc({ cetified }) {
           </span>
         </div>
         <div className="z-40 mt-10 xl:ml-20 text-center">
-          <button className="text-[12px] p-2 px-4 rounded-[11px] bg-red-500 text-white hover:scale-125 transition duration-700 ease-in-out">
+          <button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            className="text-[12px] p-2 px-4 rounded-[11px] bg-red-500 text-white hover:scale-125 transition duration-700 ease-in-out"
+          >
             {`Let's talk  `}
             <TelegramIcon className="mb-1 w-4" />
           </button>
-          <button className="text-gray-700 ml-6 hover:scale-125 transition duration-700 ease-in-out">
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem className="hover:bg-white">
+              <Contact />
+            </MenuItem>
+          </Menu>
+          <button
+            onClick={() => {
+              window.location.href = "#projects";
+            }}
+            className="text-gray-700 ml-6 hover:scale-125 transition duration-700 ease-in-out"
+          >
             Portfolio <CallMadeOutlinedIcon className="fill-gray-500 w-6" />
           </button>
         </div>

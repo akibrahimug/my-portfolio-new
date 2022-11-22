@@ -61,38 +61,40 @@ export default function Contact() {
         >
           <h3 className="mb-4 text-center font-medium">Send me a Message</h3>
 
-          <input
-            type="text"
-            className="w-full border  p-2 rounded-md placeholder:p-2 outline-none"
-            placeholder="Name"
-            id="name"
-            name="name"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            className="w-full border mt-4  p-2 rounded-md placeholder:p-2 outline-none"
-            placeholder="Company"
-            id="company"
-            name="company"
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            className="w-full border mt-4 p-2 rounded-md  placeholder:p-2 outline-none"
-            placeholder="Email"
-            onChange={handleChange}
-            id="email"
-            name="email"
-          />
-          <textarea
-            maxLength={300}
-            className="w-full border mt-4 rounded-md resize-none placeholder:p-2 outline-none"
-            placeholder="Message(300-words Max)"
-            onChange={handleChange}
-            id="message"
-            name="message"
-          />
+          <div className="flex flex-col w-[300px]">
+            <input
+              type="text"
+              className="w-full border  p-2 rounded-md placeholder:p-2 outline-none"
+              placeholder="Name"
+              id="name"
+              name="name"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              className="w-full border mt-4  p-2 rounded-md placeholder:p-2 outline-none"
+              placeholder="Company"
+              id="company"
+              name="company"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              className="w-full border mt-4 p-2 rounded-md  placeholder:p-2 outline-none"
+              placeholder="Email"
+              onChange={handleChange}
+              id="email"
+              name="email"
+            />
+            <textarea
+              maxLength={300}
+              className="w-full border mt-4 rounded-md resize-none placeholder:p-2 outline-none"
+              placeholder="Message(300-words Max)"
+              onChange={handleChange}
+              id="message"
+              name="message"
+            />
+          </div>
           <button
             type="submit"
             className="text-gray-700 hover:text-white block rounded-md border p-2 mt-4 w-32 m-auto text-base hover:shadow-md active:scale-95 transition-all duration-100 hover:bg-red-500 text-center"

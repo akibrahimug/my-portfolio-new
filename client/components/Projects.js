@@ -4,7 +4,7 @@ import SmallProjects from "./SmallProjects";
 
 function Projects() {
   return (
-    <div>
+    <div id="projects">
       <BigProject />
       <SmallProjects />
     </div>
