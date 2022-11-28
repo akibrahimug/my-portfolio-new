@@ -22,7 +22,7 @@ function newexperience() {
     endDate: "",
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
-
+  console.log(data);
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets

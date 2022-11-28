@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { Storage } = require("@google-cloud/storage");
 const Multer = require("multer");
-const GoogleStrategy = require("passport-google-token").Strategy;
-const passport = require("passport");
-const { User } = require("../models");
-const AuthControler = require("../middleware/googleOauthHandler");
+// const GoogleStrategy = require("passport-google-token").Strategy;
+// const passport = require("passport");
+// const { User } = require("../models");
+// const AuthControler = require("../middleware/googleOauthHandler");
 
 require("dotenv").config();
 
@@ -50,70 +50,70 @@ router.get("/uploads", async (req, res) => {
   }
 });
 // getprofile
-const getProfile = (profile) => {
-  const { id, displayName, emails, provider } = profile;
-  if (emails?.length) {
-    const email = emails[0].value;
-    return {
-      googleId: id,
-      firstName: displayName[0],
-      lastName: displayName[1],
-      emailAddress: email,
-      provider,
-    };
-  }
-};
+// const getProfile = (profile) => {
+//   const { id, displayName, emails, provider } = profile;
+//   if (emails?.length) {
+//     const email = emails[0].value;
+//     return {
+//       googleId: id,
+//       firstName: displayName[0],
+//       lastName: displayName[1],
+//       emailAddress: email,
+//       provider,
+//     };
+//   }
+// };
 
-// Get user from google
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/pictures/auth/google/callback",
-      scope: ["profile"],
-    },
+// // Get user from google
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//       callbackURL: "/pictures/auth/google/callback",
+//       scope: ["profile"],
+//     },
 
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        const existsGoogleAccount = await User.findOne({
-          where: {
-            googleId: profile.id,
-          },
-        });
-        if (!existsGoogleAccount) {
-          const existsGoogleEmail = await User.findOne({
-            where: {
-              email: getProfile(profile).emailAddress,
-            },
-          });
-          if (!existsGoogleEmail) {
-            const newUser = await User.create(getProfile(profile));
-            return done(null, newUser);
-          }
-          return done(null, existsGoogleEmail);
-        }
-        return done(null, existsGoogleAccount);
-      } catch (err) {
-        throw err;
-      }
-    }
-  )
-);
+//     async (accessToken, refreshToken, profile, done) => {
+//       try {
+//         const existsGoogleAccount = await User.findOne({
+//           where: {
+//             googleId: profile.id,
+//           },
+//         });
+//         if (!existsGoogleAccount) {
+//           const existsGoogleEmail = await User.findOne({
+//             where: {
+//               email: getProfile(profile).emailAddress,
+//             },
+//           });
+//           if (!existsGoogleEmail) {
+//             const newUser = await User.create(getProfile(profile));
+//             return done(null, newUser);
+//           }
+//           return done(null, existsGoogleEmail);
+//         }
+//         return done(null, existsGoogleAccount);
+//       } catch (err) {
+//         throw err;
+//       }
+//     }
+//   )
+// );
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findByPk(id)
-    .then((user) => {
-      done(null, user);
-    })
-    .catch((err) => {
-      done(err, null);
-    });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findByPk(id)
+//     .then((user) => {
+//       done(null, user);
+//     })
+//     .catch((err) => {
+//       done(err, null);
+//     });
+// });
 
 // Get user from google
 // router.post(
@@ -126,16 +126,16 @@ passport.deserializeUser((id, done) => {
 // );
 
 // login failed
-router.get("signin/failed", async (req, res) => {
-  res.status(401).json({
-    message: "Login failed",
-  });
-});
+// router.get("signin/failed", async (req, res) => {
+//   res.status(401).json({
+//     message: "Login failed",
+//   });
+// });
 
-// logout
-router.get("/logout", async (req, res) => {
-  req.logout();
-  res.redirect(process.env.CLIENT_URL);
-});
+// // logout
+// router.get("/logout", async (req, res) => {
+//   req.logout();
+//   res.redirect(process.env.CLIENT_URL);
+// });
 
 module.exports = router;

@@ -57,7 +57,10 @@ module.exports = (sequelize) => {
         },
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT("long"),
+        unique: {
+          msg: "The experience you entered already exists",
+        },
         allowNull: false,
         validate: {
           notNull: {

@@ -8,13 +8,13 @@ function technologies() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
-  const [projects, setProjects] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
-      setProjects(res);
+    backend.getTechnologies().then((res) => {
+      setTechnologies(res);
     });
   }, []);
-
+  console.log(technologies);
   return (
     <div>
       <RestHead />
@@ -41,21 +41,24 @@ function technologies() {
       </div>
       <div
         className={`${
-          projects
+          technologies
             ? "grid mt-6 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 max-w-7xl mx-auto "
             : ""
         }`}
       >
-        {projects ? (
-          projects.map((project, i) => (
-            <div key={i} className="group relative border">
-              <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 ">
+        {technologies ? (
+          technologies.map((tech, i) => (
+            <div key={i} className="group relative ">
+              <div className="min-h-80 aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-64 ">
                 <img
-                  src={project.pictureUrl}
+                  src={tech.pictureUrl}
                   alt=""
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                  className="object-contain object-center lg:h-full lg:w-full p-20"
                 />
               </div>
+              <p className="absolute bottom-0 text-[30px] text-center font-bold bg-gray-700 text-white w-[100%]">
+                {tech.techTitle}
+              </p>
             </div>
           ))
         ) : (

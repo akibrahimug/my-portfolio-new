@@ -70,9 +70,26 @@ function ProfileDesc({ cetified }) {
             <Line className="inline rotate-90 h-[140px] w-[183px]" />
           </div>
           <div className="flex items-center w-[100%] justify-center gap-4 mt-10 mb-10 2xl:mb-0 2xl:mt-0 2xl:justify-end">
-            <GitHubIcon className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer" />
-            <LinkedIn className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer" />
-            <Twitter className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer" />
+            <GitHubIcon
+              onClick={() => {
+                window.open("https://github.com/akibrahimug");
+              }}
+              className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer"
+            />
+            <LinkedIn
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/kasoma-ibrahim-89a732168/"
+                );
+              }}
+              className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer"
+            />
+            <Twitter
+              onClick={() => {
+                window.open("https://twitter.com/Akibrahimug");
+              }}
+              className="w-14 2xl:w-12 2xl:h-12 h-14 bg-white border active:scale-75  p-[12px]  hover:scale-105 hover:border hover:bg-red-500 transition transform ease-out duration-105  hover:text-white shadow-md rounded-full cursor-pointer"
+            />
           </div>
         </div>
       </div>

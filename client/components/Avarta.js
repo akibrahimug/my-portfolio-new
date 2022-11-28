@@ -23,7 +23,11 @@ function Avarta() {
               key={i}
               className="relative h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
             >
-              <img src={p.pictureUrl} alt="" layout="fill" />
+              <img
+                src={p.from === "2022-11-25" ? p.pictureUrl : ""}
+                alt=""
+                layout="fill"
+              />
             </div>
           ))
         ) : (

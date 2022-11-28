@@ -105,7 +105,7 @@ router.post(
       const user = req.currentUser;
       const experience = await Experience.create(req.body);
       // await experience.setUser(user);
-      res.status(201).location("/experinces").end();
+      res.status(201).location("/experiences").end();
     } catch (error) {
       if (
         error.name === "SequelizeValidationError" ||
@@ -239,9 +239,7 @@ router.get(
   "/projects",
   asyncHandler(async (req, res) => {
     try {
-      const projects = await Project.findAll({
-        attributes: { exclude: ["createdAt", "updatedAt"] },
-      });
+      const projects = await Project.findAll();
       res.status(200).json(projects);
     } catch (error) {
       throw error;

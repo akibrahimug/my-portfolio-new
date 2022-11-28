@@ -80,7 +80,7 @@ function newproject() {
         console.log(err);
       });
   };
-
+  console.log(data);
   return (
     <div>
       <RestHead />

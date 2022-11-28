@@ -4,17 +4,17 @@ import { useRouter } from "next/router";
 import { Context } from "./Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-function projects() {
+function experiences() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
-  const [projects, setProjects] = useState([]);
+  const [experience, setExperience] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
-      setProjects(res);
+    backend.getExperience().then((res) => {
+      setExperience(res);
     });
   }, []);
-
+  console.log(experience);
   return (
     <div>
       <RestHead />
@@ -41,20 +41,30 @@ function projects() {
       </div>
       <div
         className={`${
-          projects
-            ? "grid mt-6 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 max-w-7xl mx-auto "
+          experience
+            ? "grid mt-6 grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-2 xl:gap-x-8 max-w-7xl mx-auto place-items-center "
             : ""
         }`}
       >
-        {projects ? (
-          projects.map((project, i) => (
-            <div key={i} className="group relative border">
-              <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 ">
-                <img
-                  src={project.pictureUrl}
-                  alt=""
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                />
+        {experience ? (
+          experience.map((exp, i) => (
+            <div
+              key={i}
+              className="group relative border w-[500px] p-4 lg:h-[400px]"
+            >
+              <h2 className="font-bold text-[30px]">{exp.company}</h2>
+              <p className="text-md text-gray-500 mt-0">{exp.position}</p>
+              <p className="mt-4">{exp.description}</p>
+              <div className="flex justify-between items-end">
+                <p className="mt-4 text-gray-500">
+                  {new Date(exp.startDate).getFullYear()}/
+                  {new Date(exp.startDate).getMonth() + 1} -{" "}
+                  {new Date(exp.endDate).getFullYear()}/
+                  {new Date(exp.endDate).getMonth() + 1}
+                </p>
+                <button className="bg-gray-700 text-white p-2 rounded-md px-4 hover:bg-gray-600">
+                  Edit
+                </button>
               </div>
             </div>
           ))
@@ -74,4 +84,4 @@ function projects() {
   );
 }
 
-export default projects;
+export default experiences;

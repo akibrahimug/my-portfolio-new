@@ -31,10 +31,28 @@ function UploadPictures() {
       // edit the blob to be sent to the api
       //   get the files from the input element
       const files = file.files[0];
-      if (files) {
-        let blob = files.slice(0, files.size, "image/jpeg");
-        let newFile = new File([blob], `${postID}_post.jpeg`, {
+      let blob;
+      let newFile;
+      if (
+        files &&
+        (files.type === "image/png" || files.type === "image/jpeg")
+      ) {
+        blob = files.slice(0, files.size, "image/jpeg");
+        newFile = new File([blob], `${postID}_post.jpeg`, {
           type: " image/jpeg",
+        });
+
+        let formData = new FormData();
+        formData.append("imgfile", newFile);
+
+        //   make a post request to the api
+        googleUpload
+          .createPicture(formData)
+          .then((res) => (res ? router.push("/restapi") : null));
+      } else if (files && files.type === "image/svg+xml") {
+        blob = files.slice(0, files.size, "image/svg+xml");
+        newFile = new File([blob], `${postID}.svg`, {
+          type: " image/svg+xml",
         });
 
         let formData = new FormData();

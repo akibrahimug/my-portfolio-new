@@ -5,6 +5,7 @@
  **/
 // Renders a "Canel" button that redirects to '/'
 
+import { Router } from "next/router";
 import React, { useState, useContext } from "react";
 import Form from "../components/Form";
 import { Context } from "./Context";
@@ -19,6 +20,8 @@ function UserSignUp() {
     emailAddress: "",
     password: "",
   });
+
+  const router = Router;
 
   // create the errors instence in state and set it to an empty array
   const [errors, setErrors] = useState([]);
@@ -45,6 +48,7 @@ function UserSignUp() {
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
+          router.push("/");
           signIn(user.emailAddress, user.password);
         }
       })

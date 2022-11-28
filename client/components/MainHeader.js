@@ -40,7 +40,12 @@ export default function MainHeader() {
                 onClick={() => setShowModal(false)}
               />
               <h2 className="text-base ">{clickedText}</h2>
-              <BeakerIcon className=" w-8 text-red-500" />
+              <BeakerIcon
+                className=" w-8 text-red-500 cursor-pointer"
+                onClick={() => {
+                  window.location.href = "#methods";
+                }}
+              />
             </div>
             <div className="md:hidden border max-w-fit p-2 m-auto rounded-full mt-4">
               <NavButtons

@@ -9,7 +9,12 @@ export default function ModalMenu({ title, handleClick }) {
       <div className="grid grid-cols-3 items-center mt-4">
         <Logo className="w-16 md:ml-10 " />
         <h3 className="text-lg border-b border-black w-fit m-auto">{title}</h3>
-        <div className="flex items-center justify-end mr-10">
+        <div
+          onClick={() => {
+            window.location.href = "#methods";
+          }}
+          className="flex items-center justify-end mr-10 cursor-pointer"
+        >
           <h3 className="text-red-500">My Methodology</h3>
           <BeakerIcon className="hidden md:inline-flex w-6 text-red-500" />
         </div>

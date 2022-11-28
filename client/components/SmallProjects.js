@@ -1,34 +1,70 @@
-import React from "react";
-import Image from "next/image";
-import Airbnb from "./projectpics/Airbnb.png";
+import React, { useState, useEffect, useContext } from "react";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Context } from "../pages/Context";
 
-function SmallProjects() {
+export default function SmallProjects() {
+  const { backend } = useContext(Context);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    backend.getProjects().then((res) => {
+      setProjects(res);
+    });
+  }, []);
+
   return (
-    <div className="grid grid-cols-16 gap-4 p-0 m-20">
-      <div className="relative block h-[100%] overflow-hidden text-decoration-none rounded-lg">
-        <div className="relative h-auto w-[100%] ">
-          <Image src={Airbnb} objectFit="fill" alt="" />
-          <div className="absolute bottom-0 left-0 right-0 z-10 bg-black transition duration-1000 ease-in-out translate-y-full rounded-lg">
-            <div className="relative flex align-middle gap-2 p-2 rounded-l-lg translate-y-full transition duration-1000 ease-in-out">
-              <svg
-                className="w-[80px] h-[80px] absolute bottom-[100%] right-0 z-10"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path fill="black" d="M 40 80 c 22 0 40 -22 40 -40 v 40 Z" />;
-              </svg>
-              <span className="w-[50px] h-[50px] rounded-full bg-black flex-shrink-0 "></span>
-              <div className="card__header-text">
-                <h3 className="text-10 mb-4 mr-4 text-red-400 ">
-                  Jessica Parker
-                </h3>
-                <span className="text-10 text-red-400">1 hour ago</span>
-              </div>
-            </div>
+    <div className="grid lg:grid-cols-3 gap-8 place-content-center mt-20">
+      {projects.map((project, i) => (
+        <Card className="mb-4 shadow-xl relative" key={i}>
+          <CardHeader
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={project.projectTitle}
+            subheader={new Date(project.createdAt).toDateString()}
+          />
+          <CardMedia
+            component="img"
+            height="190"
+            image={project.pictureUrl}
+            alt={project.projectTitle}
+            className="w-42 max-h-64 hover:scale-105 transition-all duration-500 cursor-pointer"
+            onClick={() => window.open(project.liveSiteUrl)}
+          />
+          <CardContent className="">
+            <Typography variant="body2" color="text.secondary">
+              {project.projectDescription}
+            </Typography>
+          </CardContent>
+          <div className="flex m-4 ">
+            <button
+              className={`${
+                project.projectTitle === "CHICOTÁS: STRETCHES OF LIFE"
+                  ? "disabled"
+                  : ""
+              }bg-red-500 p-3 px-4 rounded-md text-white `}
+            >
+              <a href={project.githubUrl}>Project Code</a>
+            </button>
           </div>
-        </div>
-      </div>
+          <p
+            className={`${
+              project.projectTitle === "Airbnb-clone" ? "visible" : "hidden"
+            } text-sm border-2 border-red-500 rounded-tl-md rounded-br-md p-1 px-2 text-red-500 absolute w-40 bottom-0 right-0 font-bold`}
+          >
+            Some browsers might clasify this site as unsafe to visit.
+          </p>
+        </Card>
+      ))}
     </div>
   );
 }
-
-export default SmallProjects;

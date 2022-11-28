@@ -8,10 +8,10 @@ function badges() {
   const router = useRouter();
   const { backend } = useContext(Context);
 
-  const [projects, setProjects] = useState([]);
+  const [badges, setBadges] = useState([]);
   useEffect(() => {
-    backend.getProjects().then((res) => {
-      setProjects(res);
+    backend.getBadges().then((res) => {
+      setBadges(res);
     });
   }, []);
 
@@ -41,13 +41,13 @@ function badges() {
       </div>
       <div
         className={`${
-          projects
+          badges
             ? "grid mt-6 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8  mx-auto max-w-7xl "
             : ""
         }`}
       >
-        {projects ? (
-          projects.map((project, i) => (
+        {badges ? (
+          badges.map((project, i) => (
             <div key={i} className="group relative">
               <div className="border-2 border-black rounded-sm shadow-lg">
                 <img
