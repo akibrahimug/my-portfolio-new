@@ -10,7 +10,7 @@ export default function Header() {
     <div className="border-b flex items-center shadow-sd sm:grid sm:grid-cols-2 md:grid-cols-3 pt-3 pb-4 ">
       {/* logo */}
       <Link href="/">
-        <Logo className="w-20 md:ml-10 hidden md:inline-flex" />
+        <Logo className="w-20 md:ml-10 hidden md:inline-flex cursor-pointer active:scale-75 trasition duration-75" />
       </Link>
       <Link href="/">
         <ArrowBackIcon

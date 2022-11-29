@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { Context } from "./Context";
+import { Context } from "../Context";
 function UploadPictures() {
   const { googleUpload } = useContext(Context);
   const uuidv4 = () => {
@@ -144,7 +144,7 @@ function UploadPictures() {
                     type="submit"
                     className={`inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none
                     }`}
-                    onClick={() => router.push("/pictures")}
+                    onClick={() => router.push("pictures")}
                   >
                     Back
                   </button>

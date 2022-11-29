@@ -1,16 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
-import RestHead from "../components/RestHead";
+import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
 import Popover from "@mui/material/Popover";
-import { Context } from "./Context";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Context } from "../Context";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
-function newproject() {
+function newtechonlogy() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [value, setValue] = useState([null, null]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,39 +45,37 @@ function newproject() {
 
   // get the data from the form
   const [data, setData] = useState({
-    badgeTitle: "",
+    techTitle: "",
     pictureUrl: "",
-    techStackID: "",
+    certificationID: "",
+    experienceID: "",
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
   data.pictureUrl = currentImage ? currentImage : "";
+
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
     const { name, value } = e.target;
-
-    // if the event target id is techStackID, then set the value to a number
-    if (name === "techStackID") {
+    // if the event target id is certificationID or experienceID, then convert the value to a number
+    if (name === "certificationID" || name === "experienceID") {
       setData((project) => ({ ...project, [name]: parseInt(value) }));
     } else {
       setData((project) => ({ ...project, [name]: value }));
     }
-
-    // set the course an object with the current courses spread, and name and value stored
-    // as key value pairs
   };
   const [errors, setErrors] = useState([]);
   const submit = (e) => {
     e.preventDefault();
     backend
-      .createBadges(data)
+      .createTechnologies(data)
       .then((errors) => {
         if (errors.length) {
           // set the errors array to display them
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/badges");
+          router.push("technologies");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -86,11 +84,19 @@ function newproject() {
       });
   };
 
-  // get the technologies
-  const [technologies, setTechnologies] = useState([]);
+  // get the certificates
+  const [certificates, setCertificates] = useState([]);
   useEffect(() => {
-    backend.getTechnologies().then((technologies) => {
-      setTechnologies(technologies);
+    backend.getCertifications().then((res) => {
+      setCertificates(res);
+    });
+  }, []);
+
+  // get the experiences
+  const [experiences, setExperiences] = useState([]);
+  useEffect(() => {
+    backend.getExperience().then((res) => {
+      setExperiences(res);
     });
   }, []);
 
@@ -99,12 +105,12 @@ function newproject() {
   return (
     <div>
       <RestHead />
-      <div className="mx-auto max-w-2xl py-8 px-4 sm:py-24 sm:px-6 lg:max-w-7xl">
-        <div className="lg:grid lg:grid-cols-3 lg:gap-6">
+      <div className="mx-auto max-w-2xl py-8 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px- ">
+        <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
-                New Badge
+                New Technology
               </h3>
               <p className="mt-1 text-sm text-gray-600">
                 This information will be saved in a postgresql database. You can
@@ -119,18 +125,18 @@ function newproject() {
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3 sm:col-span-2">
                       <label
-                        htmlFor="badgeTitle"
+                        htmlFor="techTitle"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Badge Title
+                        Technology Title
                       </label>
                       <div className="my-2 flex rounded-md shadow-sm">
                         <input
                           type="text"
-                          name="badgeTitle"
-                          id="badgeTitle"
+                          name="techTitle"
+                          id="techTitle"
                           className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="Full Stack Web Development"
+                          placeholder="Facebook"
                           onChange={change}
                         />
                       </div>
@@ -203,35 +209,49 @@ function newproject() {
                       </div>
                     </div>
                   </div>
-
-                  <div>
-                    <label
-                      htmlFor="techStackID"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Teck Stack
-                    </label>
-                    <div className="my-2 flex rounded-md  ">
+                  <div className="flex gap-10">
+                    <div className="mt-1 flex rounded-md shadow-sm">
                       <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                        Click to select
+                        Certificate
                       </span>
                       <select
-                        type="text"
-                        name="techStackID"
-                        id="techStackID"
-                        className="flex text-gray-500 w-[315px] sm:w-[257px] lg:w-[385px] rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Full Stack Web Development"
+                        name="certificationID"
+                        id="certificationID"
+                        className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         onChange={change}
                       >
                         <option value="">Choose</option>
-                        {technologies ? (
-                          technologies.map((tech, i) => (
-                            <option key={i} value={tech.techStackID}>
-                              {tech.techTitle}
+                        {certificates ? (
+                          certificates.map((cert, i) => (
+                            <option key={i} value={cert.certificationID}>
+                              {cert.certificationTitle}
                             </option>
                           ))
                         ) : (
                           <></>
+                        )}
+                      </select>
+                    </div>
+                    <div className="mt-1 flex rounded-md shadow-sm">
+                      <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                        Experience
+                      </span>
+                      <select
+                        name="experienceID"
+                        id="experienceID"
+                        className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        onChange={change}
+                      >
+                        <option value="">Choose</option>
+                        {experiences ? (
+                          experiences.map((exp, i) => (
+                            <option key={i} value={exp.experienceID}>
+                              {exp.position} at
+                              {exp.company}
+                            </option>
+                          ))
+                        ) : (
+                          <option></option>
                         )}
                       </select>
                     </div>
@@ -245,7 +265,7 @@ function newproject() {
                     Save
                   </button>
                   <button
-                    onClick={() => router.push("/badges")}
+                    onClick={() => router.push("technologies")}
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none max-h-10"
                   >
                     Back
@@ -277,4 +297,4 @@ function newproject() {
   );
 }
 
-export default newproject;
+export default newtechonlogy;

@@ -1,49 +1,46 @@
 import React, { useContext } from "react";
-import { Context } from "./Context";
-import Header from "../components/Header";
-import RestHead from "../components/RestHead";
+import { Context } from "../Context";
+import Header from "../../components/Header";
+import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
 const titles = [
   {
     title: "My Pictures",
-    url: "/pictures",
+    url: "restapi/pictures",
     tag: "Private",
   },
   {
     title: "Projects",
-    url: "/projects",
+    url: "restapi/projects",
   },
   {
     title: "Profiles",
-    url: "/profiles",
+    url: "restapi/profiles",
   },
   {
     title: "Certificates",
-    url: "/certification",
+    url: "restapi/certification",
   },
   {
     title: "Badges",
-    url: "/badges",
+    url: "restapi/badges",
   },
   {
     title: "Technologies",
-    url: "/technologies",
+    url: "restapi/technologies",
   },
   {
     title: "Resumes",
-    url: "/resume",
+    url: "restapi/resume",
   },
-  {
-    title: "Social Media",
-    url: "/socialmedia",
-  },
+
   {
     title: "Experience",
-    url: "/experiences",
+    url: "restapi/experiences",
   },
   {
     title: "Messages",
-    url: "/messages",
+    url: "restapi/messages",
     tag: "Private",
   },
 ];

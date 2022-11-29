@@ -20,7 +20,7 @@ export default function SmallProjects() {
   }, []);
 
   return (
-    <div className="grid lg:grid-cols-3 gap-8 place-content-center mt-20">
+    <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-8 place-content-center mt-20">
       {projects.map((project, i) => (
         <Card className="mb-4 shadow-xl relative" key={i}>
           <CardHeader

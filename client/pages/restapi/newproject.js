@@ -1,19 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-import RestHead from "../components/RestHead";
+import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
 import Popover from "@mui/material/Popover";
-import { Context } from "./Context";
+import { Context } from "../Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 function newproject() {
   const { googleUpload, backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
-  const [value, setValue] = useState([null, null]);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -50,25 +45,14 @@ function newproject() {
 
   // get the data from the form
   const [data, setData] = useState({
-    from: "",
-    to: "",
+    projectTitle: "",
+    projectDescription: "",
     pictureUrl: "",
+    liveSiteUrl: "",
+    githubUrl: "",
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
   data.pictureUrl = currentImage ? currentImage : "";
-
-  const [date, setDate] = useState();
-  useEffect(() => {
-    if (value) {
-      setDate({
-        from: new Date(value[0]).toISOString().slice(0, 10),
-        to: new Date(value[1]).toISOString().slice(0, 10),
-      });
-    }
-  }, [value]);
-
-  data.from = date ? date.from : "";
-  data.to = date ? date.to : "";
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
@@ -81,14 +65,14 @@ function newproject() {
   const submit = (e) => {
     e.preventDefault();
     backend
-      .createAvarta(data)
+      .createProject(data)
       .then((errors) => {
         if (errors.length) {
           // set the errors array to display them
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/profiles");
+          router.push("projects");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -96,7 +80,7 @@ function newproject() {
         console.log(err);
       });
   };
-
+  console.log(data);
   return (
     <div>
       <RestHead />
@@ -105,7 +89,7 @@ function newproject() {
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
-                New Avatar
+                New Project
               </h3>
               <p className="mt-1 text-sm text-gray-600">
                 This information will be saved in a postgresql database. You can
@@ -118,7 +102,23 @@ function newproject() {
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-3 gap-6">
-                    <div className="col-span-3 sm:col-span-2 ">
+                    <div className="col-span-3 sm:col-span-2">
+                      <label
+                        htmlFor="projectTitle"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Project Title
+                      </label>
+                      <div className="my-2 flex rounded-md shadow-sm">
+                        <input
+                          type="text"
+                          name="projectTitle"
+                          id="projectTitle"
+                          className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Facebook"
+                          onChange={change}
+                        />
+                      </div>
                       <label
                         htmlFor="pictureURL"
                         className="block text-sm font-medium text-gray-700"
@@ -188,26 +188,68 @@ function newproject() {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className=" my-4 mx-6">
-                  <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    localeText={{ start: "Check-in", end: "Check-out" }}
+
+                  <div>
+                    <label
+                      htmlFor="projectDescription"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Project Description
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="projectDescription"
+                        name="projectDescription"
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="This is a project that does...."
+                        defaultValue={""}
+                        onChange={change}
+                      />
+                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Brief description for your project. Tech used,
+                      Methodology, etc...
+                    </p>
+                  </div>
+                  <label
+                    htmlFor="githubUrl"
+                    className="block text-sm font-medium text-gray-700"
                   >
-                    <DateRangePicker
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                      renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                          <TextField {...startProps} />
-                          <Box sx={{ mx: 2 }}> to </Box>
-                          <TextField {...endProps} />
-                        </React.Fragment>
-                      )}
+                    GitHub URL
+                  </label>
+                  <div className="mt-1 flex rounded-md shadow-sm">
+                    <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                      Link
+                    </span>
+                    <input
+                      type="text"
+                      name="githubUrl"
+                      id="githubUrl"
+                      className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      placeholder="https://www.example.com"
+                      onChange={change}
                     />
-                  </LocalizationProvider>
+                  </div>
+                  <label
+                    htmlFor="liveSiteUrl"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    LiveSite URL
+                  </label>
+                  <div className="mt-1 flex rounded-md shadow-sm">
+                    <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                      Link
+                    </span>
+                    <input
+                      type="text"
+                      name="liveSiteUrl"
+                      id="liveSiteUrl"
+                      className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      placeholder="https://www.example.com"
+                      onChange={change}
+                    />
+                  </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-4 justify-end">
                   <button
@@ -217,7 +259,7 @@ function newproject() {
                     Save
                   </button>
                   <button
-                    onClick={() => router.push("/profiles")}
+                    onClick={() => router.push("projects")}
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none max-h-10"
                   >
                     Back

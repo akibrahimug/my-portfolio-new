@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Context } from "./Context";
+import { Context } from "../Context";
 import { useRouter } from "next/router";
-import RestHead from "../components/RestHead";
+import RestHead from "../../components/RestHead";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -38,7 +38,7 @@ function Pictures() {
             <div className="flex gap-5">
               <button
                 className="p-3 bg-gray-500 rounded-lg shadow-lg text-white font-bold"
-                onClick={() => router.push("/upload")}
+                onClick={() => router.push("upload")}
               >
                 Upload New Picture
               </button>

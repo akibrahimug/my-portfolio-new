@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import RestHead from "../components/RestHead";
+import RestHead from "../../../components/RestHead";
 import { useRouter } from "next/router";
 import Popover from "@mui/material/Popover";
-import { Context } from "./Context";
+import { Context } from "../../Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
@@ -66,7 +66,7 @@ function newproject() {
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/profiles");
+          router.push("/restapi/newprofile");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -150,7 +150,7 @@ function newproject() {
                     Save
                   </button>
                   <button
-                    onClick={() => router.push("/profiles")}
+                    onClick={() => router.push("/restapi/newprofile")}
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none max-h-10"
                   >
                     Back

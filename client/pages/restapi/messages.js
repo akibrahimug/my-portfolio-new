@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import RestHead from "../components/RestHead";
+import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
-import { Context } from "./Context";
+import { Context } from "../Context";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+
 function message() {
   const router = useRouter();
   const { backend } = useContext(Context);
@@ -25,8 +26,8 @@ function message() {
           <div className="flex gap-5">
             <button
               disabled
-              className="p-3 bg-gray-500 rounded-lg shadow-lg text-white font-bold"
-              onClick={() => router.push("/newmessage")}
+              className="p-3 bg-gray-300 rounded-lg shadow-lg text-white font-bold"
+              onClick={() => router.push("newmessage")}
             >
               Create New Message
             </button>

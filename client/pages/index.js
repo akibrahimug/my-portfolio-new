@@ -27,7 +27,7 @@ export default function Home() {
         <HeroSection />
         <Projects />
       </div>
-      <div className="w-full bg-slate-200 p-20">
+      <div className="w-full bg-slate-100 p-20">
         <Methodologies />
       </div>
     </div>

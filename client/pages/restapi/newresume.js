@@ -1,56 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
-import RestHead from "../components/RestHead";
+import RestHead from "../../components/RestHead";
 import { useRouter } from "next/router";
 import Popover from "@mui/material/Popover";
-import { Context } from "./Context";
+import { Context } from "../Context";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function newproject() {
-  const { googleUpload, backend, authenticatedUser } = useContext(Context);
+function newresume() {
+  const { backend, authenticatedUser } = useContext(Context);
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
-  //   get the pictures from googleUpload
-  const [pictureURL, setPictureURL] = useState(null);
-  useEffect(() => {
-    googleUpload.getPictures().then((pictures) => setPictureURL(pictures[0]));
-  }, []);
-
-  const [pictures, setPictures] = useState(null);
-  useEffect(() => {
-    if (pictureURL) {
-      setPictures(
-        pictureURL.map((pic) => {
-          const url =
-            pic.storage.apiEndpoint + "/" + pic.bucket.id + "/" + pic.id;
-          return url;
-        })
-      );
-    }
-  }, [pictureURL]);
-
-  const [currentImage, setCurrentImage] = useState("");
 
   // get the data from the form
   const [data, setData] = useState({
-    socialTitle: "",
-    pictureUrl: "",
-    Link: "",
+    resumeTitle: "",
+    resumeUrl: "",
+    date: "",
     userID: authenticatedUser ? authenticatedUser.userID : "",
   });
-  data.pictureUrl = currentImage ? currentImage : "";
+
   // create a change method
   const change = (e) => {
     // create name and value to store the event targets
@@ -63,14 +30,14 @@ function newproject() {
   const submit = (e) => {
     e.preventDefault();
     backend
-      .createSocialMedia(data)
+      .createResume(data)
       .then((errors) => {
         if (errors.length) {
           // set the errors array to display them
           setErrors(errors);
           // else signIn with user emailAddress and password
         } else {
-          router.push("/socialmedia");
+          router.push("resume");
         }
       })
       // catch any errors thrown by the api and log them to the console
@@ -87,7 +54,7 @@ function newproject() {
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
-                New Social Media
+                New Resume
               </h3>
               <p className="mt-1 text-sm text-gray-600">
                 This information will be saved in a postgresql database. You can
@@ -102,104 +69,52 @@ function newproject() {
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3 sm:col-span-2">
                       <label
-                        htmlFor="socialTitle"
+                        htmlFor="resumeTitle"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Social Media Title
+                        Resume Title
                       </label>
                       <div className="my-2 flex rounded-md shadow-sm">
                         <input
                           type="text"
-                          name="socialTitle"
-                          id="socialTitle"
+                          name="resumeTitle"
+                          id="resumeTitle"
                           className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Facebook"
                           onChange={change}
                         />
                       </div>
                       <label
-                        htmlFor="pictureURL"
+                        htmlFor="resumeUrl"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Picture URL
+                        Resume URL
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                          Click to select
+                          Paste URL here
                         </span>
                         <input
                           type="text"
-                          name="pictureURL"
-                          id="pictureURL"
+                          name="resumeUrl"
+                          id="resumeUrl"
                           className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="https://www.example.com"
-                          value={currentImage}
-                          onClick={handleClick}
                           onChange={change}
                         />
-                        <Popover
-                          id={id}
-                          open={open}
-                          anchorEl={anchorEl}
-                          onClose={handleClose}
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "left",
-                          }}
-                        >
-                          <div
-                            className={`${
-                              pictures
-                                ? "grid m-6 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-                                : ""
-                            }`}
-                          >
-                            {pictures ? (
-                              pictures.map((pic, i) => (
-                                <div key={i} className="group relative">
-                                  <div className="max-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                                    <img
-                                      src={pic}
-                                      alt=""
-                                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                                      onClick={() => {
-                                        setCurrentImage(pic);
-                                        handleClose();
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              ))
-                            ) : (
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  marginTop: "30px",
-                                }}
-                              >
-                                <CircularProgress className="text-gray-500 " />
-                              </Box>
-                            )}
-                          </div>
-                        </Popover>
                       </div>
                       <label
-                        htmlFor="Link"
-                        className="block mt-2 text-sm font-medium text-gray-700"
+                        htmlFor="date"
+                        className="block text-sm mt-2 font-medium text-gray-700"
                       >
-                        Social Media URL
+                        Created on Date
                       </label>
-                      <div className="mt-1 flex rounded-md shadow-sm">
-                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                          Link
-                        </span>
+                      <div className="my-2 flex rounded-md shadow-sm">
                         <input
-                          type="text"
-                          name="Link"
-                          id="Link"
-                          className="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="https://www.example.com"
+                          type="date"
+                          name="date"
+                          id="date"
+                          className="block w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           onChange={change}
                         />
                       </div>
@@ -214,7 +129,7 @@ function newproject() {
                     Save
                   </button>
                   <button
-                    onClick={() => router.push("/socialmedia")}
+                    onClick={() => router.push("resume")}
                     className="inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none max-h-10"
                   >
                     Back
@@ -246,4 +161,4 @@ function newproject() {
   );
 }
 
-export default newproject;
+export default newresume;
