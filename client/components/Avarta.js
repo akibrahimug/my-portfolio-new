@@ -15,13 +15,13 @@ function Avarta() {
   }, []);
 
   return (
-    <div>
+    <div className="grid grid-rows-2">
       <div className="flex justify-center lg:justify-end">
         {profile ? (
           profile.map((p, i) => (
             <div
               key={i}
-              className="relative h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
+              className="relative w-[360px] mt-8 h-[350px] min-w-[300px] md:h-[30em] md:w-[25em] m-auto lg:mt-10"
             >
               <img
                 src={p.from === "2022-11-25" ? p.pictureUrl : ""}
@@ -49,7 +49,7 @@ function Avarta() {
           </div>
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 z-10">
         <Bio />
       </div>
     </div>

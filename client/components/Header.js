@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Logo from "./svg/Logo.svg";
 import MainHeader from "./MainHeader";
-import { BeakerIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Methodologies from "./Methodologies";
 
 export default function Header() {
   return (
@@ -21,15 +21,7 @@ export default function Header() {
 
       {/* middle section */}
       <MainHeader />
-      <div
-        className="hidden md:inline-flex m-2 md:mr-10 items-center justify-end text-red-700 cursor-pointer"
-        onClick={() => {
-          window.location.href = "#methods";
-        }}
-      >
-        <p className="md:hidden lg:inline-flex">My Methodology</p>
-        <BeakerIcon className="w-8" />
-      </div>
+      <Methodologies />
     </div>
   );
 }

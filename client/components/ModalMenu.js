@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./svg/Logo.svg";
-import { BeakerIcon } from "@heroicons/react/24/solid";
 import { GitHub } from "@mui/icons-material";
 
 export default function ModalMenu({ title, handleClick }) {
@@ -9,15 +8,6 @@ export default function ModalMenu({ title, handleClick }) {
       <div className="grid grid-cols-3 items-center mt-4">
         <Logo className="w-16 md:ml-10 " />
         <h3 className="text-lg border-b border-black w-fit m-auto">{title}</h3>
-        <div
-          onClick={() => {
-            window.location.href = "#methods";
-          }}
-          className="flex items-center justify-end mr-10 cursor-pointer"
-        >
-          <h3 className="text-red-500">My Methodology</h3>
-          <BeakerIcon className="hidden md:inline-flex w-6 text-red-500" />
-        </div>
       </div>
 
       <div className="relative flex border rounded-full mt-6 items-center justify-between bg-gray-100 max-w-[800px] m-auto">

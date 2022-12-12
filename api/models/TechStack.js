@@ -50,6 +50,10 @@ module.exports = (sequelize) => {
     TechStack.belongsTo(models.User, {
       foreignKey: { fieldName: "userID", allowNull: false },
     });
+    TechStack.belongsToMany(models.Project, {
+      through: "ProjectTechStack",
+      foreignKey: { fieldName: "techStackID" },
+    });
   };
   return TechStack;
 };

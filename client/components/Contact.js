@@ -102,7 +102,7 @@ export default function Contact() {
             Send
           </button>
         </form>
-        <div className="hidden sm:inline-block mt-4 border rounded-2xl mb-4 pb-4 shadow-md">
+        <div className="hidden sm:inline-block mt-4 border rounded-2xl mb-4 pb-4 shadow-md ">
           <h3 className="pt-5 ml-4 text-center font-medium">
             If you prefer an alternative way.
           </h3>

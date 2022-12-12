@@ -72,6 +72,11 @@ module.exports = (sequelize) => {
     },
     { sequelize }
   );
-
+  Project.associate = (models) => {
+    Project.belongsToMany(models.TechStack, {
+      through: "ProjectTechStack",
+      foreignKey: { fieldName: "projectID" },
+    });
+  };
   return Project;
 };

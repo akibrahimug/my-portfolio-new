@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../Context";
 import Header from "../../components/Header";
 import RestHead from "../../components/RestHead";
@@ -46,8 +46,22 @@ const titles = [
 ];
 function MyRestAPI() {
   // call the authenticated user data fro context
-  const { authenticatedUser, googleUpload } = useContext(Context);
+  const { authenticatedUser, backend, googleUpload } = useContext(Context);
   const router = useRouter();
+
+  const [messages, setMessages] = useState([]);
+
+  // rerender the page if new message is added
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      backend.getMessage().then((res) => {
+        setMessages(res);
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Header />
@@ -70,6 +84,11 @@ function MyRestAPI() {
               ) : (
                 <></>
               )}
+              {title.title === "Messages" ? (
+                <span className="absolute top-[-10px] right-[-10px] text-sm text-white p-3 rounded-full bg-red-500 ">
+                  {messages.length}
+                </span>
+              ) : null}
             </button>
           ))}
         </div>

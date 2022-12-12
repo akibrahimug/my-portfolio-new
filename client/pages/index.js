@@ -2,7 +2,6 @@ import Head from "next/head";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import Projects from "../components/Projects";
-import Methodologies from "../components/Methodologies";
 import { motion, useScroll, useSpring } from "framer-motion";
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -26,9 +25,6 @@ export default function Home() {
       <div className="max-w-[1400px] m-auto">
         <HeroSection />
         <Projects />
-      </div>
-      <div className="w-full bg-slate-100 p-20">
-        <Methodologies />
       </div>
     </div>
   );

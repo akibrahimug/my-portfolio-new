@@ -2,8 +2,8 @@ import React from "react";
 
 function Bio() {
   return (
-    <div className="border m-auto rounded-lg shadow-sm  max-w-[500px]  2xl:w-[500px] w-[430px] md:w-[400px] lg:w-[450px] lg:ml-12  xl:m-auto">
-      <h4 className="text-2xl text-gray-600 mb-3 w-64  text-center mt-4">
+    <div className=" m-auto rounded-lg shadow-md py-2 max-w-[500px] border-t-8 border-black  2xl:w-[500px] w-[460px] lg:w-[450px] lg:ml-8  xl:m-auto">
+      <h4 className="text-2xl text-gray-600 mb-3 w-64  text-center mt-4 ">
         About me
       </h4>
       <p className="px-10 mb-10 text-gray-600">

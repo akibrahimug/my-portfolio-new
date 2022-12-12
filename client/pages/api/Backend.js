@@ -586,4 +586,16 @@ export default class Backend {
       throw new Error("Something went wrong");
     }
   }
+
+  // get projectTechStack
+  async getProjectTechStack() {
+    // create a response constant to save the data that GET from the api
+    const response = await this.api("/projectTechStack");
+    // if the get was successful
+    if (response.status === 200) {
+      // return the json data and then save it as data
+      return response.json().then((data) => data);
+      // else id the response has any problem
+    }
+  }
 }

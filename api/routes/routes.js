@@ -13,6 +13,7 @@ const {
   Resume,
   Social,
   PersonalStatement,
+  ProjectTechStack,
 } = require("../models");
 const { userAuth } = require("../middleware/userAuth");
 const { asyncHandler } = require("../middleware/asyncHandler");
@@ -519,6 +520,19 @@ router.get(
         },
       });
       res.status(200).json(methodology);
+    } catch (error) {
+      throw error;
+    }
+  })
+);
+
+// get projectTechStack
+router.get(
+  "/projectTechStack",
+  asyncHandler(async (req, res) => {
+    try {
+      const projectTechStack = await ProjectTechStack.findAll();
+      res.status(200).json(projectTechStack);
     } catch (error) {
       throw error;
     }

@@ -67,11 +67,6 @@ function BigProject() {
             </p>
             <div>
               <div className="flex justify-center flex-wrap mt-4  bg-slate-100  rounded-md  ">
-                {/* <Next className="w-8 m-4 " />
-                <ReactLogo className="w-8 m-4 " />
-                <Tailwind className="w-10 m-4 " />
-                <Github className="w-8 m-4 " />
-                <Npm className="w-10 m-4 mt-6" /> */}
                 {filteredTechnologies?.map((tech, i) =>
                   tech !== null ? (
                     <img
@@ -90,12 +85,13 @@ function BigProject() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-3 md:justify-end md:gap-4 px-10 py-4">
-            <button
+          <div className="flex justify-center gap-3 md:justify-end md:gap-4 px-10 py-12">
+            {/* <button
               onClick={() => {
                 window.open(projects?.liveSiteUrl);
               }}
-              className="text-sm bg-red-500 text-white rounded-lg px-4 py-3.5 mt-5"
+              disabled
+              className="text-sm bg-red-500 text-white rounded-lg px-4 py-3.5 mt-5 "
             >
               Live Site
             </button>
@@ -103,10 +99,11 @@ function BigProject() {
               onClick={() => {
                 window.open(projects?.githubUrl);
               }}
-              className="text-sm bg-red-500 text-white rounded-lg px-4 py-3.5 mt-5"
+              disabled
+              className="text-sm bg-red-500 text-white rounded-lg px-4 py-3.5 mt-5 "
             >
               View Code
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
