@@ -10,6 +10,7 @@ const path = require("path");
 const picRoutes = require("./routes/picRoutes");
 const logger = require("morgan");
 const passport = require("passport");
+const session = require("express-session");
 
 // variable to enable global error logging
 const enableGlobalErrorLogging =
@@ -21,12 +22,12 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
 );
-
+app.use(session({ secret: "cess and Ezra" }));
 app.use("/pictures", picRoutes);
 app.use("/api", routes);
 
