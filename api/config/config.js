@@ -3,11 +3,11 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: "ak",
+    username: process.env.DB_USER,
     password: process.env.LOCAL_PASSWORD,
-    database: "myrestapi",
-    host: "127.0.0.1",
-    port: 5432,
+    database: process.env.DB_NAME,
+    host: process.env.ADDRESS,
+    port: process.env.DB_PORT,
     dialect: "postgres",
   },
   test: {

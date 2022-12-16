@@ -6,19 +6,30 @@ function Bio() {
       <h4 className="text-2xl text-gray-600 mb-3 w-64  text-center mt-4 ">
         About me
       </h4>
-      <p className="px-10 mb-10 text-gray-600">
-        I am a creative, analytical and innovative Full-Stack Developer
-        delivering scalable Web applications. I am highly skilled at writing
-        well-documented, testable and efficient code using current best
-        practices in Web development. I have a passion for building excellent
-        software that improves the lives of those around me. After completing
-        several online courses, I have developed a strong skill set in several
-        different programming languages and frameworks. I am a quick learner and
-        I am able to pick up new languages and frameworks quickly. I am a team
-        player and I am able to work well with others. I am also able to work
-        independently and I am able to manage my time effectively. I am a hard
-        worker and I am able to work under pressure.
-      </p>
+      <div className="px-10 mb-10 text-gray-600">
+        <p>
+          I am a lifelong learner and analytical Full stack Javascript developer
+          with 2 years commercial experience building web applications using
+          modern tools and libraries. I am looking for a Mid Frontend developer
+          role at a mid - sized company.
+        </p>
+        <p>
+          In my previous role I created internal systems that helped increase
+          company productivity by 80% in 4 months. For one application I created
+          a workflow that reduced time spent from 3-4 hours to 6 minutes while
+          creating an app that was intuitive and easy to use.
+        </p>
+        <p>
+          Prior to my career in software development, I spent my time in the
+          fashion & education world, where I was starting projects from scratch
+          with the goal of making a positive impact in my community.
+        </p>
+        <p>
+          In an ideal world, I am surrounded by smart and high-performing people
+          whom I can learn from! In my free time, I am either learning a new
+          technology or playing basketball.
+        </p>
+      </div>
     </div>
   );
 }

@@ -54,12 +54,9 @@ function MyRestAPI() {
   // rerender the page if new message is added
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      backend.getMessage().then((res) => {
-        setMessages(res);
-      });
-    }, 1000);
-    return () => clearInterval(interval);
+    backend.getMessage().then((res) => {
+      setMessages(res);
+    });
   }, []);
 
   return (
