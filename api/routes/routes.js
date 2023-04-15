@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {
-  User,
   TechStack,
   Experience,
   Certification,
@@ -17,46 +16,6 @@ const {
 } = require("../models");
 const { userAuth } = require("../middleware/userAuth");
 const { asyncHandler } = require("../middleware/asyncHandler");
-
-// Create a new user
-router.post(
-  "/users",
-  asyncHandler(async (req, res) => {
-    try {
-      await User.create(req.body);
-      res.status(201).location("/users").end();
-    } catch (error) {
-      if (
-        error.name === "SequelizeValidationError" ||
-        error.name === "SequelizeUniqueConstraintError"
-      ) {
-        const errors = error.errors.map((err) => err.message);
-        res.status(400).json({ errors });
-      } else {
-        throw error;
-      }
-    }
-  })
-);
-
-// Get the current authenticated user
-router.get(
-  "/users",
-  userAuth,
-  asyncHandler(async (req, res) => {
-    try {
-      const user = req.currentUser;
-      res.json({
-        userID: user.userID,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        emailAddress: user.emailAddress,
-      });
-    } catch (error) {
-      throw error;
-    }
-  })
-);
 
 // Create a new tech stack
 router.post(
@@ -76,7 +35,7 @@ router.post(
         const errors = error.errors.map((err) => err.message);
         res.status(400).json({ errors });
       } else {
-        throw error;
+        throw new Error(error);
       }
     }
   })
